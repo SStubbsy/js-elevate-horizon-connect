@@ -4,21 +4,21 @@ import { BottomNavigation } from 'react-native-paper'
 import { MaterialIcons } from '@expo/vector-icons'
 
 import HomeScreen from '../screens/HomeScreen'
-import EventScreen from '../screens/EventsScreen'
 import SettingScreen from '../screens/SettingsScreen'
+import EventNavigator from './EventNavigator'
 
 const MainNavigator = () => {
     const [index, setIndex] = useState(0);
 
     const [routes] = React.useState([
         { key: 'home', title: 'Home', icon: 'home' },
-        { key: 'event', title: 'Event List', icon: 'event' },
+        { key: 'events', title: 'Events List', icon: 'event' },
         { key: 'settings', title: 'Settings', icon: 'settings' },
     ]);
 
     const renderScene = BottomNavigation.SceneMap({
         home: HomeScreen,
-        event: EventScreen,
+        events: EventNavigator,
         settings: SettingScreen
     });
 
