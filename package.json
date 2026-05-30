@@ -15,12 +15,14 @@
     "@react-navigation/stack": "^7.9.2",
     "expo": "~55.0.24",
     "expo-status-bar": "~55.0.6",
+    "install": "^0.13.0",
+    "npx": "^10.2.2",
     "react": "19.2.0",
-    "react-dom": "19.2.0",
+    "react-dom": "^19.2.0",
     "react-native": "0.83.6",
     "react-native-paper": "^5.15.2",
     "react-native-safe-area-context": "^5.8.0",
-    "react-native-web": "^0.21.0"
+    "react-native-web": "^0.21.2"
   },
   "private": true
 }
