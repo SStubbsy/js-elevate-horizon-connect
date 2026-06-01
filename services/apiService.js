@@ -77,7 +77,7 @@ export async function getEventById(id) {
 
 export async function registerForEvent(eventId, fullName, email) {
     try {
-        const response = await fetch(`${API_BASE_URL}/registration`,
+        const response = await fetch(`${API_BASE_URL}/registrations`,
             {
                 method: "POST",
                 headers: {
