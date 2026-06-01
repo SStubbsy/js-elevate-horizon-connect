@@ -43,15 +43,15 @@ const EventDetailsScreen = ({ route, navigation }) => {
 
     return (
         <Surface style={{ flex: 1, padding: 20 }} elevation={5}>
-            <Surface elevation={0}>
+            <Surface style={{ padding: 10, borderRadius: 12, marginBottom: 20 }} elevation={4}>
                 <View style={{ flexDirection: "row", flexWrap: 'wrap', marginBottom: 8 }}>
 
                     <View style={{ width: "40%", paddingVertical: 4 }}>
                         <Text style={{ fontWeight: "bold", alignItems: 'flex-start' }}></Text>
                     </View>
 
-                    <View style={{ width: "60%", paddingVertical: 4 }}>
-                        <Text style={{ fontSize: 24, fontWeight: 'bold' }}>{eventDetails.title}</Text>
+                    <View style={{ width: "100%", paddingVertical: 4 }}>
+                        <Text style={{ fontSize: 18, fontWeight: 'bold', textAlign: 'left', marginBottom: 10, marginLeft: 5 }}>{eventDetails.title}</Text>
                     </View>
 
                 </View>
@@ -105,19 +105,10 @@ const EventDetailsScreen = ({ route, navigation }) => {
 
                 <View style={{ flexDirection: "row", flexWrap: 'wrap', marginBottom: 8 }}>
                     <View style={{ width: "40%", paddingVertical: 4 }}>
-                        <Text style={{ fontWeight: "bold" }}>StartTime:</Text>
+                        <Text style={{ fontWeight: "bold" }}>Time:</Text>
                     </View>
                     <View style={{ width: "60%", paddingVertical: 4 }}>
-                        <Text>{eventDetails.startTime}</Text>
-                    </View>
-                </View>
-
-                <View style={{ flexDirection: "row", flexWrap: 'wrap', marginBottom: 8 }}>
-                    <View style={{ width: "40%", paddingVertical: 4 }}>
-                        <Text style={{ fontWeight: "bold" }}>EndTime:</Text>
-                    </View>
-                    <View style={{ width: "60%", paddingVertical: 4 }}>
-                        <Text>{eventDetails.endTime}</Text>
+                        <Text>{eventDetails.startTime} - {eventDetails.endTime}</Text>
                     </View>
                 </View>
 
