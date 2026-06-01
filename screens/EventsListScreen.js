@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList, ActivityIndicator } from 'react-native'
+import { StyleSheet, View, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native'
 import { Text, Button, Card, Searchbar } from 'react-native-paper'
 import React from 'react';
 import { useState, useEffect } from 'react';
@@ -93,20 +93,22 @@ const EventsListsScreen = (props) => {
                     data={events}
                     keyExtractor={(item) => item.id.toString()}
                     renderItem={({ item }) => (
-                        <View style={styles.card} >
-                            <Text sytle={styles.title}>
-                                {item?.title}
-                            </Text>
-                            <Text>
-                                {item?.date}
-                            </Text>
-                            <Text>
-                                {item?.location}
-                            </Text>
-                            <Text>
-                                {item?.spotRemaining}
-                            </Text>
-                        </View>
+                        <TouchableOpacity style={{ flex: 1 }} onPress={() => (props.navigation.navigate("Event Details", { event: item, offline }))}>
+                            <View style={styles.card} >
+                                <Text sytle={styles.title}>
+                                    {item?.title}
+                                </Text>
+                                <Text>
+                                    {item?.date}
+                                </Text>
+                                <Text>
+                                    {item?.location}
+                                </Text>
+                                <Text>
+                                    {item?.spotRemaining}
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
                     )
                     }
                 />
