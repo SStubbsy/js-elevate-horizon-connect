@@ -121,7 +121,7 @@ const EventDetailsScreen = ({ route, navigation }) => {
                     Back
                 </Button>
 
-                <Button icon="camera" mode="contained" onPress={() => navigation.navigate("Event Registration", { event: eventDetails })}
+                <Button icon="camera" mode="contained" onPress={() => navigation.navigate("Events Registration", { event: eventDetails })}
                     disable={offline || eventDetails.spotsRemaining <= 0 || eventDetails.isCancelled} >
                     Register
                 </Button>
