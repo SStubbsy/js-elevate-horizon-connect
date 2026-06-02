@@ -96,6 +96,15 @@ const EventDetailsScreen = ({ route, navigation }) => {
 
                 <View style={{ flexDirection: "row", flexWrap: 'wrap', marginBottom: 8 }}>
                     <View style={{ width: "40%", paddingVertical: 4 }}>
+                        <Text style={{ fontWeight: "bold" }}>SpotsRemaining:</Text>
+                    </View>
+                    <View style={{ width: "60%", paddingVertical: 4 }}>
+                        <Text>{eventDetails.spotsRemaining}</Text>
+                    </View>
+                </View>
+
+                <View style={{ flexDirection: "row", flexWrap: 'wrap', marginBottom: 8 }}>
+                    <View style={{ width: "40%", paddingVertical: 4 }}>
                         <Text style={{ fontWeight: "bold" }}>Location:</Text>
                     </View>
                     <View style={{ width: "60%", paddingVertical: 4 }}>

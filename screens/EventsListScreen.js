@@ -105,7 +105,7 @@ const EventsListsScreen = (props) => {
                                     {item?.location}
                                 </Text>
                                 <Text>
-                                    {item?.spotRemaining}
+                                    {item?.spotsRemaining}
                                 </Text>
                             </View>
                         </TouchableOpacity>
