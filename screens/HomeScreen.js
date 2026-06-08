@@ -33,7 +33,7 @@ const HomeScreen = () => {
   return (
 
     <Surface style={{ flex: 1, padding: 20 }} elevation={5}>
-      <Text variant="headlineLarge" style={{ marginBottom: 24, fontWeight: "bold", textAlign: "center", marginVertical: 20, color: theme.colors.Primary }}>Welcome To Elevate Horizon Connect!</Text>
+      <Text variant="headlineLarge" style={{ marginBottom: 24, fontSize: theme.fontSizes.body, fontWeight: "bold", textAlign: "center", marginVertical: 20, color: theme.colors.Primary }}>Welcome To Elevate Horizon Connect!</Text>
       <Divider />
       <TouchableOpacity onPress={playSound} activeOpacity={0.7}>
         <Image source={imageIndex.logo} resizeMode='contain' style={{ width: "300", height: 150, margin: 20 }} /><Image />

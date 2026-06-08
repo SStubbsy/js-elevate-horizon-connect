@@ -1,10 +1,13 @@
-import { StyleSheet, View, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native'
-import { Text, Button, Card, Searchbar } from 'react-native-paper'
-import React from 'react';
-import { useState, useEffect } from 'react';
+import { View, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { Text, Button, Searchbar } from 'react-native-paper';
+import React, { useState, useEffect } from 'react';
 import { getAllEvents } from '../services/apiService';
+import { useAppPreferences } from '../components/AppPreferencesContext';
 
 const EventsListsScreen = (props) => {
+
+    const { theme } = useAppPreferences();
+
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [offline, setOffline] = useState(false);
@@ -12,145 +15,132 @@ const EventsListsScreen = (props) => {
     const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
-        console.log("Hello from Jacob")
         loadEvents();
     }, []);
 
     async function loadEvents() {
-        console.log("LoadEvent")
         setLoading(true);
         const result = await getAllEvents();
         if (result.success) {
             setEvents(result.events);
             setOffline(result.offline);
-            console.log(events)
+        } else {
+            setError(result.error);
         }
-        else {
-            setError(result.error)
-        }
-        setLoading(false)
+        setLoading(false);
     }
 
     if (loading) {
         return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: theme.colors.surface }}>
                 <ActivityIndicator size="large" />
-                <Text>"Loading Events..."</Text>
+                <Text style={{ fontSize: theme.fontSizes.body, color: theme.colors.onSurface }}>
+                    Loading Events...
+                </Text>
             </View>
-        )
+        );
     }
 
     return (
-        <View style={styles.container}>
+        <View style={{ flex: 1, padding: 12, backgroundColor: theme.colors.surface }}>
 
-            <View style={styles.topSection}>
-
-                <Text style={styles.title}>EventsListScreen</Text>
+            <View style={{
+                paddingBottom: 16,
+                borderBottomWidth: 1,
+                borderColor: theme.colors.outline,
+                marginBottom: 16
+            }}>
 
                 <Searchbar
-                    style={styles.Searchbar}
+                    style={{ marginBottom: 12 }}
                     placeholder="Search Events..."
                     value={searchQuery}
                     onChangeText={setSearchQuery}
+                    inputStyle={{ fontSize: theme.fontSizes.body }}
+                    iconColor={theme.colors.onSurface}
                 />
 
                 <Button
-                    style={styles.viewTodayEventBtn}
+                    style={{ marginBottom: 12 }}
                     icon="calendar-today"
-                    mode="contained" onPress={() => {
+                    mode="contained"
+                    labelStyle={{ fontSize: theme.fontSizes.body }}
+                    onPress={() => {
                         props.navigation.navigate("Event Details", {
                             eventNumber: 123,
                             eventSuburb: "Hornsby"
-                        })
-                        console.log('Pressed')
-                    }}>
+                        });
+                    }}
+                >
                     View Today's Events
                 </Button>
 
-                <View style={styles.btnRow}>
-                    <Button mode="contained">Athletics</Button>
-                    <Button mode="contained">Today</Button>
-                    <Button mode="contained">Fitness</Button>
-                    <Button mode="contained">Music</Button>
+                <View style={{ flexDirection: "row", justifyContent: "center", marginTop: 10 }}>
+                    <Button mode="contained" style={{ marginHorizontal: 4 }} labelStyle={{ fontSize: theme.fontSizes.body }}>Athletics</Button>
+                    <Button mode="contained" style={{ marginHorizontal: 4 }} labelStyle={{ fontSize: theme.fontSizes.body }}>Today</Button>
+                    <Button mode="contained" style={{ marginHorizontal: 4 }} labelStyle={{ fontSize: theme.fontSizes.body }}>Fitness</Button>
+                    <Button mode="contained" style={{ marginHorizontal: 4 }} labelStyle={{ fontSize: theme.fontSizes.body }}>Music</Button>
                 </View>
 
-                <View style={styles.btnRow}>
-                    <Button mode="contained">Social</Button>
-                    <Button mode="contained">Outdoors</Button>
-                    <Button mode="contained">Family</Button>
+                <View style={{ flexDirection: "row", justifyContent: "center", marginTop: 10 }}>
+                    <Button mode="contained" style={{ marginHorizontal: 4 }} labelStyle={{ fontSize: theme.fontSizes.body }}>Social</Button>
+                    <Button mode="contained" style={{ marginHorizontal: 4 }} labelStyle={{ fontSize: theme.fontSizes.body }}>Outdoors</Button>
+                    <Button mode="contained" style={{ marginHorizontal: 4 }} labelStyle={{ fontSize: theme.fontSizes.body }}>Family</Button>
                 </View>
 
             </View>
-            <View style={styles.bottomSection}>
+
+            <View style={{ flex: 1 }}>
                 {offline && (
                     <View>
-                        <Text>
+                        <Text style={{ fontSize: theme.fontSizes.body, color: theme.colors.onSurface }}>
                             Text offline mode
                         </Text>
                     </View>
                 )}
+
                 <FlatList
                     data={events}
                     keyExtractor={(item) => item.id.toString()}
                     renderItem={({ item }) => (
-                        <TouchableOpacity style={{ flex: 1 }} onPress={() => (props.navigation.navigate("Event Details", { event: item, offline }))}>
-                            <View style={styles.card} >
-                                <Text sytle={styles.title}>
+                        <TouchableOpacity
+                            style={{ flex: 1 }}
+                            onPress={() =>
+                                props.navigation.navigate("Event Details", { event: item, offline })
+                            }
+                        >
+                            <View
+                                style={{
+                                    padding: 16,
+                                    marginBottom: 12,
+                                    borderWidth: 1,
+                                    borderColor: theme.colors.outline,
+                                    borderRadius: 8,
+                                    backgroundColor: theme.colors.surface
+                                }}
+                            >
+                                <Text style={{ fontSize: theme.fontSizes.title, fontWeight: "bold", color: theme.colors.onSurface }}>
                                     {item?.title}
                                 </Text>
-                                <Text>
+
+                                <Text style={{ fontSize: theme.fontSizes.body, color: theme.colors.onSurface }}>
                                     {item?.date}
                                 </Text>
-                                <Text>
+
+                                <Text style={{ fontSize: theme.fontSizes.body, color: theme.colors.onSurface }}>
                                     {item?.location}
                                 </Text>
-                                <Text>
+
+                                <Text style={{ fontSize: theme.fontSizes.body, color: theme.colors.onSurface }}>
                                     {item?.spotsRemaining}
                                 </Text>
                             </View>
                         </TouchableOpacity>
-                    )
-                    }
+                    )}
                 />
             </View>
-        </View >
-    )
-}
+        </View>
+    );
+};
 
-export default EventsListsScreen
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 12,
-    },
-    title: {
-        fontSize: 18,
-        fontWeight: 'bold',
-    },
-    card: {
-        padding: 16,
-        marginBottom: 12,
-        borderWidth: 1,
-        borderColor: "#3d3d3d",
-        borderRadius: 8,
-    },
-    searchBar: {
-        marginBottom: 12,
-    },
-    topSection: {
-        paddingBottom: 16,
-        borderBottomWidth: 1,
-        borderColor: "#ccc",
-        marginBottom: 16,
-    },
-    btnRow: {
-        flexDirection: "row",
-        justifyContent: "center",
-        marginTop: 10
-    },
-    bottomSection: {
-        flex: 1,
-    }
-
-})
+export default EventsListsScreen;
