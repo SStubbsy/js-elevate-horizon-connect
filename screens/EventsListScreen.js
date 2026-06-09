@@ -1,22 +1,50 @@
 import { View, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
-import { Text, Button, Searchbar } from 'react-native-paper';
+import { Text, Button, Searchbar, Surface } from 'react-native-paper';
 import React, { useState, useEffect } from 'react';
 import { getAllEvents } from '../services/apiService';
 import { useAppPreferences } from '../components/AppPreferencesContext';
+import * as Font from 'expo-font';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 
 const EventsListsScreen = (props) => {
 
     const { theme } = useAppPreferences();
 
     const [events, setEvents] = useState([]);
+    const [filteredEvents, setFilteredEvents] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState("All");
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const categories = ["All", "Today", "Education", "Community", "Arts", "Fitness", "Technology",
+        "Music", "Food", "Outdoor", "Entertainment", "Networking", "Health"]
     const [loading, setLoading] = useState(true);
     const [offline, setOffline] = useState(false);
-    const [error, setError] = useState([]);
-    const [searchQuery, setSearchQuery] = useState('');
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         loadEvents();
     }, []);
+
+    useEffect(() => {
+        let updated = [...events];
+        //filter by category
+        if (selectedCategory === "Today") {
+            const today = new Date().toISOString().split("T")[0];
+            updated = updated.filter((e) => e.date.startsWith(today));
+        }
+        else if (selectedCategory !== "All") {
+            updated = updated.filter((e) => e.category === selectedCategory)
+        }
+
+        //filter by search text
+        if (searchQuery.trim() !== "") {
+            const q = searchQuery.toLowerCase();
+            updated = updated.filter((e) => e.title.toLowerCase().includes(q) || e.description.toLowerCase().includes(q));
+        }
+
+        setFilteredEvents(updated);
+    }, [events, selectedCategory, searchQuery]);
 
     async function loadEvents() {
         setLoading(true);
@@ -42,7 +70,28 @@ const EventsListsScreen = (props) => {
     }
 
     return (
-        <View style={{ flex: 1, padding: 12, backgroundColor: theme.colors.surface }}>
+        <Surface style={{ flex: 1, padding: 12 }} elevation={5}>
+
+            {
+                offline && (
+                    <View style={{ backgroundColor: "yellow", padding: 10, marginBottom: 10, borderRadius: 5 }}>
+                        <Text style={{ fontWeight: 'bold', color: 'black', textAlign: 'center' }}>
+                            You are currently offline.
+                        </Text>
+                    </View>
+                )
+            }
+
+            {
+                error && (
+                    <View style={{ backgroundColor: "red", padding: 10, marginBottom: 10, borderRadius: 5 }}>
+                        <Text style={{ fontWeight: 'bold', color: 'white', textAlign: 'center' }}>
+                            Error = {error}
+                        </Text>
+                    </View>
+                )
+            }
+
 
             <View style={{
                 paddingBottom: 16,
@@ -60,47 +109,30 @@ const EventsListsScreen = (props) => {
                     iconColor={theme.colors.onSurface}
                 />
 
-                <Button
-                    style={{ marginBottom: 12 }}
-                    icon="calendar-today"
-                    mode="contained"
-                    labelStyle={{ fontSize: theme.fontSizes.body }}
-                    onPress={() => {
-                        props.navigation.navigate("Event Details", {
-                            eventNumber: 123,
-                            eventSuburb: "Hornsby"
-                        });
-                    }}
-                >
-                    View Today's Events
-                </Button>
-
-                <View style={{ flexDirection: "row", justifyContent: "center", marginTop: 10 }}>
-                    <Button mode="contained" style={{ marginHorizontal: 4 }} labelStyle={{ fontSize: theme.fontSizes.body }}>Athletics</Button>
-                    <Button mode="contained" style={{ marginHorizontal: 4 }} labelStyle={{ fontSize: theme.fontSizes.body }}>Today</Button>
-                    <Button mode="contained" style={{ marginHorizontal: 4 }} labelStyle={{ fontSize: theme.fontSizes.body }}>Fitness</Button>
-                    <Button mode="contained" style={{ marginHorizontal: 4 }} labelStyle={{ fontSize: theme.fontSizes.body }}>Music</Button>
-                </View>
-
-                <View style={{ flexDirection: "row", justifyContent: "center", marginTop: 10 }}>
-                    <Button mode="contained" style={{ marginHorizontal: 4 }} labelStyle={{ fontSize: theme.fontSizes.body }}>Social</Button>
-                    <Button mode="contained" style={{ marginHorizontal: 4 }} labelStyle={{ fontSize: theme.fontSizes.body }}>Outdoors</Button>
-                    <Button mode="contained" style={{ marginHorizontal: 4 }} labelStyle={{ fontSize: theme.fontSizes.body }}>Family</Button>
+                <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginBottom: 16, gap: 8 }}>
+                    {
+                        categories.map((cat) => (
+                            <Button
+                                key={cat}
+                                compact={true}
+                                mode={selectedCategory === cat ? "contained" : "outlined"}
+                                onPress={() => setSelectedCategory(cat)}
+                                style={{ marginRight: 2, marginBottom: 2 }}
+                                buttonColor={selectedCategory === cat ? theme.colors.primary : theme.colors.surfaceVariant}
+                                textColor={selectedCategory === cat ? "white" : theme.colors.OnSurfaceVariant}
+                            >
+                                {cat}
+                            </Button>
+                        ))
+                    }
                 </View>
 
             </View>
 
             <View style={{ flex: 1 }}>
-                {offline && (
-                    <View>
-                        <Text style={{ fontSize: theme.fontSizes.body, color: theme.colors.onSurface }}>
-                            Text offline mode
-                        </Text>
-                    </View>
-                )}
 
                 <FlatList
-                    data={events}
+                    data={filteredEvents}
                     keyExtractor={(item) => item.id.toString()}
                     renderItem={({ item }) => (
                         <TouchableOpacity
@@ -139,7 +171,7 @@ const EventsListsScreen = (props) => {
                     )}
                 />
             </View>
-        </View>
+        </Surface>
     );
 };
 

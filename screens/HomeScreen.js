@@ -1,6 +1,6 @@
-import { StyleSheet, View, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { Audio } from 'expo-av'
+import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { Audio } from 'expo-av';
 import { Divider, Surface, Text } from 'react-native-paper';
 import { useAppPreferences } from '../components/AppPreferencesContext';
 
