@@ -1,13 +1,13 @@
-## Elevate Horizon Connect App
+# Elevate Horizon Connect App
 
 A community‑focused event browsing and registration app built for the Hornsby region.
-# Author
+## Author
 
 Jacob Stubbs
-# Project Purpose
+## Project Purpose
 
 The purpose of this project is to deliver a mobile application that enables the Hornsby community, Horizon Connect staff, and event volunteers to easily browse, search, and register for local events. The app aims to eliminate manual data entry, minimise errors, and provide accurate, up‑to‑date event information while supporting accessibility features such as adjustable text size, dark mode, and sound controls.
-# Core Features
+## Core Features
 
     Event browsing — Scrollable event list with category, date, and location information.
 
@@ -25,7 +25,7 @@ The purpose of this project is to deliver a mobile application that enables the 
 
     Navigation system — Multi‑screen navigation using React Navigation.
 
-# Technology Stack
+## Technology Stack
 
     React Native
 
@@ -39,7 +39,7 @@ The purpose of this project is to deliver a mobile application that enables the 
 
     GitHub (version control)
 
-# Project Status
+## Project Status
 
 The project is currently in active development.
 
