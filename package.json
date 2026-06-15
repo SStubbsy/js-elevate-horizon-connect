@@ -9,7 +9,8 @@
     "web": "expo start --web",
     "seed": "cd server && npm install && npm run seed",
     "start:server": "cd server && npm start",
-    "dev": "concurrently \"npm run web\" \"npm run start:server\""
+    "dev": "concurrently \"npm run web\" \"npm run start:server\"",
+    "inst": "npm install && cd server && npm install"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.1.1",

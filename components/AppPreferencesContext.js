@@ -24,21 +24,21 @@ const fontSizesMap = {
 
 // Map typography variants using body/title sizes
 const generateTypography = (fontSize) => ({
-  displayLarge: { fontFamily: systemFont, fontWeight: "400", fontSize: fontSize.title + 4 },
-  displayMedium: { fontFamily: systemFont, fontWeight: "400", fontSize: fontSize.title + 2 },
+  displayLarge: { fontFamily: systemFont, fontWeight: "400", fontSize: fontSize.title + 5 },
+  displayMedium: { fontFamily: systemFont, fontWeight: "400", fontSize: fontSize.title + 3 },
   displaySmall: { fontFamily: systemFont, fontWeight: "400", fontSize: fontSize.title },
 
-  headlineLarge: { fontFamily: systemFont, fontWeight: "400", fontSize: fontSize.title + 2 },
+  headlineLarge: { fontFamily: systemFont, fontWeight: "400", fontSize: fontSize.title + 3 },
   headlineMedium: { fontFamily: systemFont, fontWeight: "400", fontSize: fontSize.title },
   headlineSmall: { fontFamily: systemFont, fontWeight: "400", fontSize: fontSize.title - 2 },
 
   titleLarge: { fontFamily: systemFont, fontWeight: "500", fontSize: fontSize.title },
-  titleMedium: { fontFamily: systemFont, fontWeight: "500", fontSize: fontSize.title - 2 },
+  titleMedium: { fontFamily: systemFont, fontWeight: "500", fontSize: fontSize.title - 3 },
   titleSmall: { fontFamily: systemFont, fontWeight: "500", fontSize: fontSize.title - 4 },
 
-  bodyLarge: { fontFamily: systemFont, fontWeight: "400", fontSize: fontSize.body + 2 },
+  bodyLarge: { fontFamily: systemFont, fontWeight: "400", fontSize: fontSize.body + 3 },
   bodyMedium: { fontFamily: systemFont, fontWeight: "400", fontSize: fontSize.body },
-  bodySmall: { fontFamily: systemFont, fontWeight: "400", fontSize: fontSize.body - 2 },
+  bodySmall: { fontFamily: systemFont, fontWeight: "400", fontSize: fontSize.body - 1 },
 
   labelLarge: { fontFamily: systemFont, fontWeight: "500", fontSize: fontSize.body },
   labelMedium: { fontFamily: systemFont, fontWeight: "500", fontSize: fontSize.body - 1 },
@@ -107,7 +107,7 @@ export const AppPreferencesProvider = ({ children }) => {
     // 🔥 Full Material 3 typography (required by React Native Paper v3)
     fonts: generateTypography(fontSizesMap[fontSizeKey]),
   };
-  
+
   return <AppPreferencesContext.Provider value={{ theme, isDarkTheme, toggleTheme, fontSizeKey, setFontSize, soundEnabled, toggleSound }}>{children}</AppPreferencesContext.Provider>;
 };
 
