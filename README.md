@@ -42,5 +42,5 @@ The purpose of this project is to deliver a mobile application that enables the 
 
 ## Project Status
 
-The project is currently in active development.
+The project is complete and is awaiting sign-off.
 
