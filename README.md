@@ -4,6 +4,7 @@ A community‑focused event browsing and registration app built for the Hornsby 
 ## Author
 
 Jacob Stubbs
+Student No.881840400
 ## Project Purpose
 
 The purpose of this project is to deliver a mobile application that enables the Hornsby community, Horizon Connect staff, and event volunteers to easily browse, search, and register for local events. The app aims to eliminate manual data entry, minimise errors, and provide accurate, up‑to‑date event information while supporting accessibility features such as adjustable text size, dark mode, and sound controls.
