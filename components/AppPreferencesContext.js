@@ -24,17 +24,17 @@ const fontSizesMap = {
 
 // Map typography variants using body/title sizes
 const generateTypography = (fontSize) => ({
-  displayLarge: { fontFamily: systemFont, fontWeight: "400", fontSize: fontSize.title + 5 },
-  displayMedium: { fontFamily: systemFont, fontWeight: "400", fontSize: fontSize.title + 3 },
+  displayLarge: { fontFamily: systemFont, fontWeight: "400", fontSize: fontSize.title + 6 },
+  displayMedium: { fontFamily: systemFont, fontWeight: "400", fontSize: fontSize.title + 4 },
   displaySmall: { fontFamily: systemFont, fontWeight: "400", fontSize: fontSize.title },
 
-  headlineLarge: { fontFamily: systemFont, fontWeight: "400", fontSize: fontSize.title + 3 },
+  headlineLarge: { fontFamily: systemFont, fontWeight: "400", fontSize: fontSize.title + 4 },
   headlineMedium: { fontFamily: systemFont, fontWeight: "400", fontSize: fontSize.title },
   headlineSmall: { fontFamily: systemFont, fontWeight: "400", fontSize: fontSize.title - 2 },
 
   titleLarge: { fontFamily: systemFont, fontWeight: "500", fontSize: fontSize.title },
-  titleMedium: { fontFamily: systemFont, fontWeight: "500", fontSize: fontSize.title - 3 },
-  titleSmall: { fontFamily: systemFont, fontWeight: "500", fontSize: fontSize.title - 4 },
+  titleMedium: { fontFamily: systemFont, fontWeight: "500", fontSize: fontSize.title - 2 },
+  titleSmall: { fontFamily: systemFont, fontWeight: "500", fontSize: fontSize.title - 1 },
 
   bodyLarge: { fontFamily: systemFont, fontWeight: "400", fontSize: fontSize.body + 3 },
   bodyMedium: { fontFamily: systemFont, fontWeight: "400", fontSize: fontSize.body },
